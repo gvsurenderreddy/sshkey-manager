@@ -13,7 +13,7 @@ Therefore, this package uses PHP to create/install keys on remote servers runnin
 
 Software Dependencies
 ---------------------
- * PHP 5.6.1 (This is the version running on my dev server. Other versions may work, but not 100% tested.)
+ * PHP 5.6.1 (This is the version running on my dev server.)
  * PHPSECLIB 0.3.9 (http://phpseclib.sourceforge.net/)
  
 Things to note
@@ -25,3 +25,8 @@ To make your server generate these keys faster, you can install the following PH
 php5-gmp
 
 This will greatly decrease your key generatation time.
+
+Legal
+-----
+This is completely, 100% not production ready. I'm only using for testing/development purposes only.
+If my code breaks your system - not my fault. :D

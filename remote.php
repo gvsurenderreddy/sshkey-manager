@@ -5,6 +5,7 @@
 	if(isset($_POST['submit'])) { 
 		$server = $_POST['server'];
 		$username = $_POST['username'];
+		$command = $_POST['command'];
 		
 		$ssh = new Net_SSH2($server);
 		$key = new Crypt_RSA();
@@ -12,16 +13,14 @@
 		if (!$ssh->login($username, $key)) {
 			exit('Login Failed or Key does not exist.');
 		} else {
-			$whoami = $ssh->exec('whoami');
-			$workingdir = $ssh->exec('pwd');
-			echo 'You are running as: '.$whoami.'<br />';
-			echo 'Your working directory: '.$workingdir.'<br /><br />';
+			echo $ssh->exec($command);
 		}
 	}
 ?>
 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
 	Username: <input type="text" name="username"><br />
 	Server: <input type="text" name="server"><br />
-	<input type="submit" name="submit" value="Verify Key"><br>
+	Command: <input type="text" name="command"><br />
+	<input type="submit" name="submit" value="Run Command"><br>
 </form>
 <a href="index.php" />Return</a>

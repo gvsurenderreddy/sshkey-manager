@@ -9,14 +9,11 @@
 
 			$rsa = new Crypt_RSA();
 			$rsa->setPublicKeyFormat(CRYPT_RSA_PUBLIC_FORMAT_OPENSSH);
-			extract($rsa->createKey($encryption));
-			
-			echo 'Key has been created!<br /><br />';		
-			echo 'Private Key: <br />'.$privatekey.'<br /><br />';
-			echo 'Public Key: <br />'.$publickey;
+			extract($rsa->createKey($encryption));	
 			
 			file_put_contents('/srv/www/htdocs/private.key', $privatekey);
 			file_put_contents('/srv/www/htdocs/public.key', $publickey);
+			echo 'Keys has been created and saved to this server!<br />';	
 		}
 	}
 ?>
