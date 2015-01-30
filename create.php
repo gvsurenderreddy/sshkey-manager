@@ -1,6 +1,6 @@
 <?php
 	if(isset($_POST['submit'])) { 
-		if(file_exists('/srv/www/htdocs/private.key') && file_exists('/srv/www/htdocs/public.key')) {
+		if(file_exists('./private.key') && file_exists('./public.key')) {
 			echo 'You already have a key pair created. Use that instead.';
 		} else {
 			include('Crypt/RSA.php');
@@ -11,8 +11,8 @@
 			$rsa->setPublicKeyFormat(CRYPT_RSA_PUBLIC_FORMAT_OPENSSH);
 			extract($rsa->createKey($encryption));	
 			
-			file_put_contents('/srv/www/htdocs/private.key', $privatekey);
-			file_put_contents('/srv/www/htdocs/public.key', $publickey);
+			file_put_contents('./private.key', $privatekey);
+			file_put_contents('./public.key', $publickey);
 			echo 'Keys has been created and saved to this server!<br />';	
 		}
 	}

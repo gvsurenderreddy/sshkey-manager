@@ -10,10 +10,10 @@
 		if (!$ssh->login($username, $password)) {
 			exit('Login Failed');
 		} else {
-			if(!file_exists('/srv/www/htdocs/public.key')) {
+			if(!file_exists('./public.key')) {
 				echo 'You need to generate an SSH public key.';
 			} else {
-				$publickey = file_get_contents('/srv/www/htdocs/public.key');
+				$publickey = file_get_contents('./public.key');
 				$ssh->exec('echo '.$publickey.' >> ~/.ssh/authorized_keys');
 				echo "Key has been installed.";
 			}

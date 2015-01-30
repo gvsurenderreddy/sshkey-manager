@@ -1,7 +1,7 @@
 <?php
 	if(isset($_POST['submit'])) { 
-		unlink('/srv/www/htdocs/private.key');
-		unlink('/srv/www/htdocs/public.key');
+		unlink('./private.key');
+		unlink('./public.key');
 		
 		echo 'Keys have been deleted.<br />';
 	}

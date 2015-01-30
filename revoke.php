@@ -8,7 +8,7 @@
 		
 		$ssh = new Net_SSH2($server);
 		$key = new Crypt_RSA();
-		$key->loadKey(file_get_contents('/srv/www/htdocs/private.key'));
+		$key->loadKey(file_get_contents('./private.key'));
 		if (!$ssh->login($username, $key)) {
 			exit('Login Failed or Key does not exist.');
 		} else {
