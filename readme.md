@@ -14,7 +14,7 @@ Therefore, this package uses PHP to create/install keys on remote servers runnin
 Software Dependencies
 ---------------------
  * PHP 5.6.1 (This is the version running on my dev server.)
- * PHPSECLIB 0.3.9 (http://phpseclib.sourceforge.net/)
+ * PHPSECLIB 0.3.10 (http://phpseclib.sourceforge.net/)
  
 Things to note
 --------------
