@@ -26,6 +26,8 @@ php5-gmp
 
 This will greatly decrease your key generatation time.
 
+**Your web daemon will need write access to the save location for the public/private keys.
+
 Legal
 -----
 This is completely, 100% not production ready. I'm only using for testing/development purposes only.
