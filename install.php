@@ -24,6 +24,6 @@
 	Username: <input type="text" name="username"><br />
 	Password: <input type="password" name="password"><br />
 	Server: <input type="text" name="server"><br />
-	<input type="submit" name="submit" value="Verify Key"><br>
+	<input type="submit" name="submit" value="Install Key"><br>
 </form>
 <a href="index.php" />Return</a>
