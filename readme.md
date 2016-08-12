@@ -13,8 +13,9 @@ Therefore, this package uses PHP to create/install keys on remote servers runnin
 
 Software Dependencies
 ---------------------
- * PHP 5.6.1 (This is the version running on my dev server.)
- * PHPSECLIB 0.3.10 (http://phpseclib.sourceforge.net/)
+ * PHP 5 or greater
+ * PHPSECLIB 1.0.2 (http://phpseclib.sourceforge.net/)
+ 
  
 Things to note
 --------------
@@ -26,7 +27,7 @@ php5-gmp
 
 This will greatly decrease your key generatation time.
 
-**Your web daemon will need write access to the save location for the public/private keys.
+**The user that is running the apache server, generally the "wwwrun" user, will will need write access to the save location for the public/private keys.
 
 Legal
 -----
