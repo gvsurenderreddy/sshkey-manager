@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>SSH Key Authenticator</title>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
 <?php
 	include('Net/SSH2.php');
 	include('Crypt/RSA.php');
@@ -10,15 +19,29 @@
 		$key = new Crypt_RSA();
 		$key->loadKey(file_get_contents('./private.key'));
 		if (!$ssh->login($username, $key)) {
-			exit('Login Failed or Key does not exist.');
+			echo '<div class="alert alert-danger"><strong>Error!</strong> Key pair does not match or does not exist.</div>';
 		} else {
-			echo 'Key is verified!';
+			echo '<div class="alert alert-success"><strong>Success!</strong> Key pair is verified.</div>';
 		}
 	}
 ?>
-<form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-	Username: <input type="text" name="username"><br />
-	Server: <input type="text" name="server"><br />
-	<input type="submit" name="submit" value="Verify Key"><br>
-</form>
-<a href="index.php" />Return</a>
+<div class="container">
+	<h2>Key Verification</h2>
+	<p>Verify matching exist between the web server and remote server. Fill out the information below.</p>
+	<form role="form" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+		<div class="form-group">
+      		<label for="server">Server:</label>
+      		<input type="text" class="form-control" id="server" name="server">
+    	</div>
+		<div class="form-group">
+      		<label for="username">Username:</label>
+      		<input type="text" class="form-control" id="username" name="username">
+    	</div>
+   		
+   		<button type="submit" class="btn btn-default" name="submit">Verify</button>
+  	</form>
+  	<br />
+  	<button type="button" class="btn btn-info" onclick="window.location.href='index.php'"">Return</button>
+</div>
+</body>
+</html>

@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>SSH Key Authenticator</title>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
 <?php
 	include('Net/SSH2.php');
 	include('Crypt/RSA.php');
@@ -11,16 +20,43 @@
 		$key = new Crypt_RSA();
 		$key->loadKey(file_get_contents('./private.key'));
 		if (!$ssh->login($username, $key)) {
-			exit('Login Failed or Key does not exist.');
+			echo '<div class="alert alert-danger"><strong>Error!</strong> Key pair does not match or does not exist.</div>';
 		} else {
-			echo $ssh->exec($command);
+			$cmdOutput = $ssh->exec($command);
+			echo '<div class="alert alert-success"><strong>Success!</strong> Remote command has been executed.</div>';
 		}
 	}
 ?>
-<form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-	Username: <input type="text" name="username"><br />
-	Server: <input type="text" name="server"><br />
-	Command: <input type="text" name="command"><br />
-	<input type="submit" name="submit" value="Run Command"><br>
-</form>
-<a href="index.php" />Return</a>
+<div class="container">
+	<h2>Remote Command Execution</h2>
+	<p>With remote keys installed, you will be able to run remote commands on those systems. Fill out the information below.</p>
+	<form role="form" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+		<div class="form-group">
+      		<label for="server">Server:</label>
+      		<input type="text" class="form-control" id="server" name="server">
+    	</div>
+		<div class="form-group">
+      		<label for="username">Username:</label>
+      		<input type="text" class="form-control" id="username" name="username">
+    	</div>
+   		<div class="form-group">
+      		<label for="command">Command:</label>
+      		<input type="text" class="form-control" id="command" name="command">
+   		 </div>
+   		 <button type="submit" class="btn btn-default" name="submit">Submit</button>
+  	</form>
+  	<br />
+  	<button type="button" class="btn btn-info" onclick="window.location.href='index.php'"">Return</button>
+  	<p>
+  	<?php 
+  		if(isset($cmdOutput)) { ?>
+  			<div class="panel panel-default">
+  				<div class="panel-heading">Command Output</div>
+  				<div class="panel-body"><?php echo $cmdOutput; ?></div>
+			</div>
+  	<?php	
+  		}
+  	?>
+</div>
+</body>
+</html>

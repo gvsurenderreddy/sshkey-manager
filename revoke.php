@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>SSH Key Authenticator</title>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
 <?php
 	include('Net/SSH2.php');
 	include('Crypt/RSA.php');
@@ -10,17 +19,50 @@
 		$key = new Crypt_RSA();
 		$key->loadKey(file_get_contents('./private.key'));
 		if (!$ssh->login($username, $key)) {
-			exit('Login Failed or Key does not exist.');
+			echo '<div class="alert alert-danger"><strong>Error!</strong> Key pair does not match or does not exist.</div>';
 		} else {
-			$ssh->exec('> ~/.ssh/authorized_keys');
-			echo 'Keys have been removed from this server!';
+			$ssh->exec('echo > ~/.ssh/authorized_keys');
+			echo '<div class="alert alert-success"><strong>Success!</strong> Key was removed from server.</div>';
 		}
 	}
 ?>
-<form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-	Username: <input type="text" name="username"><br />
-	Server: <input type="text" name="server"><br /><br />
-	Are you sure you wish to remove keys from this server?<br />
-	<input type="submit" name="submit" value="Revoke Key"><br />
-</form>
-<a href="index.php" />Return</a>
+<div class="container">
+	<h2>Key Revokation</h2>
+	<p>Revoke keys that exist on a remote system.</p>
+	<form role="form" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+		<div class="form-group">
+      		<label for="server">Server:</label>
+      		<input type="text" class="form-control" id="server" name="server">
+    	</div>
+		<div class="form-group">
+      		<label for="username">Username:</label>
+      		<input type="text" class="form-control" id="username" name="username">
+    	</div>
+   		
+   		<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Revoke</button>
+   		<!-- Modal -->
+  		<div class="modal fade" id="myModal" role="dialog">
+   			<div class="modal-dialog">
+    
+	     		<!-- Modal content-->
+	      		<div class="modal-content">
+	        		<div class="modal-header">
+	         			<button type="button" class="close" data-dismiss="modal">&times;</button>
+	          			<h3 class="modal-title">Are you sure?</h3>
+	        		</div>
+	       			 <div class="modal-body">
+	          			<p>Are you sure you want to revoke the keys off this system?</p>
+	        		</div>
+	       			<div class="modal-footer">
+	          			<button type="button" class="btn btn-info" data-dismiss="modal">No</button>
+	          			<button type="submit" class="btn btn-danger" name="submit">Yes</button>
+	        		</div>
+	      		</div>
+     		</div>
+ 		</div>
+  	</form>
+  	<br />
+  	<button type="button" class="btn btn-info" onclick="window.location.href='index.php'"">Return</button>
+</div>
+</body>
+</html>
