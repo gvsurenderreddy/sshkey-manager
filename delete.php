@@ -8,6 +8,8 @@
 </head>
 <body>
 <?php
+	set_include_path(get_include_path() . PATH_SEPARATOR . 'phpseclib');
+
 	if(isset($_POST['submit'])) { 
 		unlink('./private.key');
 		unlink('./public.key');

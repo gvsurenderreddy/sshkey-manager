@@ -8,6 +8,8 @@
 </head>
 <body>
 <?php
+	set_include_path(get_include_path() . PATH_SEPARATOR . 'phpseclib');
+
 	include('Net/SSH2.php');
 	include('Crypt/RSA.php');
 
@@ -18,10 +20,12 @@
 		$ssh = new Net_SSH2($server);
 		$key = new Crypt_RSA();
 		$key->loadKey(file_get_contents('./private.key'));
+		$publicKey = file_get_contents('./public.key');
+
 		if (!$ssh->login($username, $key)) {
 			echo '<div class="alert alert-danger"><strong>Error!</strong> Key pair does not match or does not exist.</div>';
 		} else {
-			$ssh->exec('echo > ~/.ssh/authorized_keys');
+			$ssh->exec("sed -i '\|".$publicKey."|d' ~/.ssh/authorized_keys");
 			echo '<div class="alert alert-success"><strong>Success!</strong> Key was removed from server.</div>';
 		}
 	}

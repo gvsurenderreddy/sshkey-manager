@@ -11,6 +11,8 @@
 	<h2>SSH Key Manager</h2>
 	<p>SSH Key Management for remote systems. Please follow guide below.</p>
 	<?php
+		set_include_path(get_include_path() . PATH_SEPARATOR . 'phpseclib');
+
 		if(file_exists('./private.key') && file_exists('./public.key')) {
 			echo '<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>You already have a key pair created!</div>';	
 		}

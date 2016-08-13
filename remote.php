@@ -8,6 +8,8 @@
 </head>
 <body>
 <?php
+	set_include_path(get_include_path() . PATH_SEPARATOR . 'phpseclib');
+
 	include('Net/SSH2.php');
 	include('Crypt/RSA.php');
 
@@ -23,7 +25,7 @@
 			echo '<div class="alert alert-danger"><strong>Error!</strong> Key pair does not match or does not exist.</div>';
 		} else {
 			$cmdOutput = $ssh->exec($command);
-			echo '<div class="alert alert-success"><strong>Success!</strong> Remote command has been executed.</div>';
+			echo '<div class="alert alert-success"><strong>Success!</strong> Command has been executed by remote system.</div>';
 		}
 	}
 ?>
@@ -51,8 +53,8 @@
   	<?php 
   		if(isset($cmdOutput)) { ?>
   			<div class="panel panel-default">
-  				<div class="panel-heading">Command Output</div>
-  				<div class="panel-body"><?php echo $cmdOutput; ?></div>
+  				<div class="panel-heading">Command Output:<br />"<?php echo $command; ?>"</div>
+  				<div class="panel-body"><pre><?php echo $cmdOutput; ?></pre></div>
 			</div>
   	<?php	
   		}

@@ -8,6 +8,8 @@
 </head>
 <body>
 <?php
+	set_include_path(get_include_path() . PATH_SEPARATOR . 'phpseclib');
+	
 	if(isset($_POST['submit'])) { 
 		if(file_exists('./private.key') && file_exists('./public.key')) {
 			echo 'You already have a key pair created. Use that instead.';
