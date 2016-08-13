@@ -36,7 +36,8 @@ I have the system setup to use 2048-bit keys; generating these could take longer
 
 So in that case you'll have two options.
 1) Change default timeout for PHP. (Not advised)
-2) Install the "php5-gmp" package. It will greatly decrease your key generatation time.
+2) Install the "php5-gmp" package. It will greatly decrease your key generatation time.   
+3) Make sure to setup Apache to allow overrides. (Find httpd.conf for Apache, make sure "AllowOverride" is set to "All"). This will prevent external users from accessing your keys...   
 
 
 Final Notes/Legal

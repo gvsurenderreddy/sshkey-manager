@@ -1,3 +1,4 @@
-<Files ~".key">
-Deny from all
+<Files ~ "\.key$">
+    Order allow,deny
+    Deny from all
 </Files>
