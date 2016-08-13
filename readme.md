@@ -15,13 +15,18 @@ Another side benefit, is almost all linux systems have SSH installed. So you don
 Screenshot or it didn't happen...
 ---------------------------------
 ![Alt text](screenshot.png "Screenshot of landing page...")
-*Now including some bootstrapping!
 
 
 Installation
 ------------
 1) Just place in web directory of your choice running PHP.
 2) Make sure the "keys" directory is writable by your web daemon. (This little thing will tell you if you don't have something setup correctly)
+
+
+What if I have my own keys?
+---------------------------
+No problem. Just drop a public and private key (renamed to "public.key" and "private.key") into the "keys" directory. 
+My system will use those instead of making you new ones.
 
  
 Things to note
