@@ -11,6 +11,11 @@ Given that our world is moving to web based applications, remote commands are us
 Therefore, this package uses PHP to create/install keys on remote servers running under the user specified using SSH RSA keys.
 
 
+Screenshot?
+-----------
+![Alt text](screenshot.png "Screenshot of landing page...")
+
+
 Software Dependencies
 ---------------------
  * PHP 5 or greater
