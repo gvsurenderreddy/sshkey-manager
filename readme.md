@@ -19,7 +19,7 @@ Screenshot or it didn't happen...
 
 Installation
 ------------
-1) Just place in web directory of your choice running PHP.
+1) Just place in web directory of your choice running PHP.    
 2) Make sure the "keys" directory is writable by your web daemon. (This little thing will tell you if you don't have something setup correctly)
 
 
