@@ -11,8 +11,8 @@
 	set_include_path(get_include_path() . PATH_SEPARATOR . 'phpseclib');
 
 	if(isset($_POST['submit'])) { 
-		unlink('./private.key');
-		unlink('./public.key');
+		unlink('./keys/private.key');
+		unlink('./keys/public.key');
 		
 		echo '<div class="alert alert-success"><strong>Success!</strong> The public and private key pair were deleted.</div>';
 	}
@@ -20,7 +20,7 @@
 <div class="container">
 	<h2>Key Deletion</h2>
 	<?php
-		if(!file_exists('./public.key')) {
+		if(!file_exists('./keys/public.key')) {
 			echo '<div class="alert alert-warning">No local keys were found on this system.</div>';
 		}
 		else {

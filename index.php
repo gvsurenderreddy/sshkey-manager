@@ -13,12 +13,18 @@
 	<?php
 		set_include_path(get_include_path() . PATH_SEPARATOR . 'phpseclib');
 
-		if(file_exists('./private.key') && file_exists('./public.key')) {
-			echo '<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>You already have a key pair created!</div>';	
+		if(file_exists('./keys/private.key') && file_exists('./keys/public.key')) {
+			echo '<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>You already have a key pair created!</div>';
 		}
 		else {
 			echo '<div class="alert alert-warning fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>No existing key pair can be found. Please create keys.</div>';	
 		}
+		
+		if(!is_writable('./keys')) {
+			$phpUser = exec('whoami');
+			echo '<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>The "keys" directory is not writable to "'. $phpUser .'" user.</div>';
+		}
+
 	?>
 	<h4>Key Creation and Deployment</h4>
 	<div class="panel panel-default">

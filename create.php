@@ -11,7 +11,7 @@
 	set_include_path(get_include_path() . PATH_SEPARATOR . 'phpseclib');
 	
 	if(isset($_POST['submit'])) { 
-		if(file_exists('./private.key') && file_exists('./public.key')) {
+		if(file_exists('./keys/private.key') && file_exists('./keys/public.key')) {
 			echo 'You already have a key pair created. Use that instead.';
 		} else {
 			include('Crypt/RSA.php');
@@ -21,15 +21,16 @@
 			extract($rsa->createKey(2048));	
 			
 			// Create RSA Keys
-			file_put_contents('./private.key', $privatekey);
-			file_put_contents('./public.key', $publickey);
+			file_put_contents('./keys/private.key', $privatekey);
+			file_put_contents('./keys/public.key', $publickey);
 
 			// Check if they were actually created
-			if (file_exists('./private.key') && file_exists('./public.key')) {
+			if (file_exists('./keys/private.key') && file_exists('./keys/public.key')) {
 				echo '<div class="alert alert-success"><strong>Success!</strong> Keys has been created and saved to this server!</div>';	
 			}
 			else {
-				echo '<div class="alert alert-danger"><strong>Error!</strong> Keys were not created. Please check folder permissions so that the web user can write to root directory</div>';	
+				$phpUser = exec('whoami');
+				echo '<div class="alert alert-danger"><strong>Error!</strong> Keys were not created. The "keys" directory is not writable to "'. $phpUser .'" user.</div>';	
 			}
 		}
 	}
@@ -38,7 +39,7 @@
 	<h2>Key Creation</h2>
 	<p>Generate 2048 bit public/private keys for remote systems.</p>
 	<?php
-		if(file_exists('./private.key') && file_exists('./public.key')) {
+		if(file_exists('./keys/private.key') && file_exists('./keys/public.key')) {
 			echo '<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>You already have a key pair created!</div>';	
 		}
 	?>

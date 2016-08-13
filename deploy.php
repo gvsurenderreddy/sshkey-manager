@@ -21,10 +21,10 @@
 		if (!$ssh->login($username, $password)) {
 			echo '<div class="alert alert-danger"><strong>Error!</strong> Server and/or login information is not incorrect.</div>';
 		} else {
-			if(!file_exists('./public.key')) {
+			if(!file_exists('./keys/public.key')) {
 				echo '<div class="alert alert-warning">You must first create a Key Pair.</div>';
 			} else {
-				$publickey = file_get_contents('./public.key');
+				$publickey = file_get_contents('./keys/public.key');
 				$ssh->exec('echo '.$publickey.' >> ~/.ssh/authorized_keys');
 				echo '<div class="alert alert-success"><strong>Success!</strong> Keys has been created and saved to this server!</div>';
 			}
@@ -35,7 +35,7 @@
 	<h2>Key Installation</h2>
 	<p>Install your SSH key on a remote system. Fill out the information below.</p>
 	<?php
-		if(!file_exists('./public.key') || !file_exists('./private.key')) {
+		if(!file_exists('./keys/public.key') || !file_exists('./keys/private.key')) {
 			echo '<div class="alert alert-warning">No local keys were found on this system.</div>';
 		}
 		else {

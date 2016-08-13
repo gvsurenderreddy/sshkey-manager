@@ -19,7 +19,8 @@
 		
 		$ssh = new Net_SSH2($server);
 		$key = new Crypt_RSA();
-		$key->loadKey(file_get_contents('./private.key'));
+		$key->loadKey(file_get_contents('./keys/private.key'));
+		
 		if (!$ssh->login($username, $key)) {
 			echo '<div class="alert alert-danger"><strong>Error!</strong> Key pair does not match or does not exist.</div>';
 		} else {
@@ -30,6 +31,11 @@
 <div class="container">
 	<h2>Key Verification</h2>
 	<p>Verify matching exist between the web server and remote server. Fill out the information below.</p>
+	<?php 
+		if(!file_exists('./keys/public.key')) {
+			echo '<div class="alert alert-warning">No local keys were found on this system.</div>';
+		}
+	?>
 	<form role="form" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
 		<div class="form-group">
       		<label for="server">Server:</label>
