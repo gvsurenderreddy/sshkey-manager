@@ -1,40 +1,41 @@
-PHP SSH Key Management
-======================
+SSH Key Manager
+===============
 
 This package is used to distribute SSH keys (using PHP) to remote servers.
 
-Why is this useful?
+
+Who would use this?
 -------------------
-If you want to run commands on external servers, you usually need daemon's of some kind running to listen for requests.
-Given that our world is moving to web based applications, remote commands are usually done from web servers and not local bash/scripting.
+I ran into issues recently where I needed to issue commands to remote systems in batches. Instead of typing in passwords, we can use SSH keys to get into the systems much quicker. 
+The added benefit of this is PHP can also execute commands via bash, so I use this tool to do simple batch scripting. I polished it a bit and made it public should anyone else find a need for something like this.
 
-Therefore, this package uses PHP to create/install keys on remote servers running under the user specified using SSH RSA keys.
+Another side benefit, is almost all linux systems have SSH installed. So you don't need special software to get this working. Just a central system, like a web server, where this package can run. 
 
 
-Screenshot?
------------
+Screenshot or it didn't happen...
+---------------------------------
 ![Alt text](screenshot.png "Screenshot of landing page...")
+*Now including some bootstrapping!
 
 
-Software Dependencies
----------------------
- * PHP 5 or greater
- * PHPSECLIB 1.0.2 (http://phpseclib.sourceforge.net/)
- 
+Installation
+------------
+1) Just place in web directory of your choice running PHP.
+2) Make sure the "keys" directory is writable by your web daemon. (This little thing will tell you if you don't have something setup correctly)
+
  
 Things to note
 --------------
-When creating RSA key pairs, the phpseclib uses entropy on server to generate the keys. Should your server be idle or not have much activity - generating keys may take some time.
-For example, generating a 2048-bit key could take longer than 30 seconds - which is the default timeout for SSH commands built into phpseclib.
+When creating RSA key pairs, PHP uses entropy on server to generate the keys. Should your server be idle or not have much activity - generating keys may take some time.
+I have the system setup to use 2048-bit keys; generating these could take longer than 30 seconds - which is the default timeout for PHP.
 
-To make your server generate these keys faster, you can install the following PHP packages:
-php5-gmp
+So in that case you'll have two options.
+1) Change default timeout for PHP. (Not advised)
+2) Install the "php5-gmp" package. It will greatly decrease your key generatation time.
 
-This will greatly decrease your key generatation time.
 
-**The user that is running the apache server, generally the "wwwrun" user, will will need write access to the save location for the public/private keys.
-
-Legal
------
-This is completely, 100% not production ready. I'm only using for testing/development purposes only.
-If my code breaks your system - not my fault. :D
+Final Notes/Legal
+-----------------
+This is completely, 100% not supported. I built this thing to help me on projects. It's handy for me but might not work for you and could probably break something else. :/
+If my code breaks your system - not my fault.
+Otherwise, let me know if something isn't working, needs fixed, or if you have ideas on making it better.
