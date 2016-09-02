@@ -34,7 +34,7 @@ Things to note
 When creating RSA key pairs, PHP uses entropy on server to generate the keys. Should your server be idle or not have much activity - generating keys may take some time.
 I have the system setup to use 2048-bit keys; generating these could take longer than 30 seconds - which is the default timeout for PHP.
 
-So in that case you'll have two options.
+So in that case you'll have two options.    
 1. Change default timeout for PHP. (Not advised)    
 2. Install the "php5-gmp" package. It will greatly decrease your key generatation time.       
 3. Make sure to setup Apache to allow overrides. (Find httpd.conf for Apache, make sure "AllowOverride" is set to "All").     
