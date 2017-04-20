@@ -42,6 +42,9 @@
 		if(file_exists('./keys/private.key') && file_exists('./keys/public.key')) {
 			echo '<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>You already have a key pair created!</div>';	
 		}
+		if(!extension_loaded('gmp')) {
+			echo '<div class="alert alert-warning fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>PHP GMP extension is not loaded. Key generation may fail if system entropy is not high enough.</div>';
+		}
 	?>
 	<form role="form" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
 		<button type="submit" class="btn btn-success" name="submit">Create Key</button>
