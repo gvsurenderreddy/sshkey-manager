@@ -25,6 +25,7 @@
 				echo '<div class="alert alert-warning">You must first create a Key Pair.</div>';
 			} else {
 				$publickey = file_get_contents('./keys/public.key');
+				$ssh->exec('mkdir -p ~/.ssh');
 				$ssh->exec('echo '.$publickey.' >> ~/.ssh/authorized_keys');
 				echo '<div class="alert alert-success"><strong>Success!</strong> Keys has been created and saved to this server!</div>';
 			}

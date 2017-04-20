@@ -48,3 +48,9 @@ Final Notes/Legal
 This is completely, 100% not supported. I built this thing to help me on projects. It's handy for me but might not work for you and could probably break something else. :/
 If my code breaks your system - not my fault.
 Otherwise, let me know if something isn't working, needs fixed, or if you have ideas on making it better.
+
+
+Changelog
+---------
+- Updated PHPSECLIB to 1.0.5
+- Fix bug with SSH Key deployment
