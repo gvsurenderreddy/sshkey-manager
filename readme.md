@@ -20,8 +20,8 @@ Screenshot or it didn't happen...
 Installation
 ------------
 See "Things to Note" section after installation.
-1) Just place in web directory of your choice running PHP.    
-2) Done. Seriously.
+1. Just place in web directory of your choice running PHP.    
+2. Done. Seriously.
 
 What if I have my own keys?
 ---------------------------
@@ -31,19 +31,24 @@ My system will use those instead of making you new ones.
  
 Things to note
 --------------
-1) Make sure the "keys" directory is writable by your web daemon. This software will notify you if not correct.
+1. Make sure the "keys" directory is writable by your web daemon. This software will notify you if not correct.
 
-2) Ensure Apache is set to "AllowOverrides All" for the web directory where this package sits. (Find httpd.conf or default-server.conf for Apache, make sure "AllowOverride" is set to "All").     
-  * This will prevent external users from accessing your keys. 
-  * I include htaccess files to prevent outside access of the "keys" directory, but it only works when AllowOverride is set to "All".
+2. Ensure Apache is set to "AllowOverrides All" for the web directory where this package sits. (Find httpd.conf or default-server.conf for Apache, make sure "AllowOverride" is set to "All").     
+  1. This will prevent external users from accessing your keys. 
+  2. I include htaccess files to prevent outside access of the "keys" directory, but it only works when AllowOverride is set to "All".
 
-3) When creating RSA key pairs, PHP uses entropy on server to generate the keys. Should your server be idle or not have much activity - generating keys may take some time and may not work correctly. 
+3. When creating RSA key pairs, PHP uses entropy on server to generate the keys. Should your server be idle or not have much activity - generating keys may take some time and may not work correctly. 
 
 So in that case you'll have two options.    
-1. Change default timeout for PHP. (Not advised)    
-2. Install the "php5-gmp" package. It will greatly decrease your key generatation time. 
+  1. Change default timeout for PHP. (Not advised)    
+  2. Install the "php5-gmp" package. It will greatly decrease your key generatation time. 
 
 Either way, the software package will notify you if the "php5-gmp" package isn't installed or loaded.
+
+
+What is the Config file?
+------------------------
+As I add functionality over time, I may have a need to setup a more "global" approach to how this software works. I added the file to allow me to enable or disable alerting on the index page as it can get annoying.
 
 
 Final Notes/Legal
