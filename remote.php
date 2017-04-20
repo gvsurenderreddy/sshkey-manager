@@ -25,10 +25,17 @@
 		if (!$ssh->login($username, $key)) {
 			echo '<div class="alert alert-danger"><strong>Error!</strong> Key pair does not match or does not exist.</div>';
 		} else {
-			$cmdOutput = $ssh->exec($command);
+			$good_command = true;
 			echo '<div class="alert alert-success"><strong>Success!</strong> Command has been executed by remote system.</div>';
 		}
 	}
+
+	function live_command_output($outputString) {
+		echo $outputString;
+  		ob_flush();
+  		flush();
+       	sleep(1);
+    }
 ?>
 <div class="container">
 	<h2>Remote Command Execution</h2>
@@ -57,10 +64,12 @@
   	<button type="button" class="btn btn-info" onclick="window.location.href='index.php'"">Return</button>
   	<p>
   	<?php 
-  		if(isset($cmdOutput)) { ?>
-  			<div class="panel panel-default">
+  		if(isset($good_command)) { 
+  	?>
+  			<div class="panel panel-success">
   				<div class="panel-heading">Command Output:<br />"<?php echo $command; ?>"</div>
-  				<div class="panel-body"><pre><?php echo $cmdOutput; ?></pre></div>
+  				<div class="panel-body"><pre><?php $startTime = microtime(true); $ssh->exec($command, 'live_command_output'); $endTime = microtime(true); ?></pre></div>
+  				<div class="panel-footer">Execution Time: <?php echo date("H:i:s",$endTime-$startTime); ?></div>
 			</div>
   	<?php	
   		}
