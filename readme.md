@@ -34,14 +34,14 @@ Things to note
 1. Make sure the "keys" directory is writable by your web daemon. This software will notify you if not correct.
 
 2. Ensure Apache is set to "AllowOverrides All" for the web directory where this package sits. (Find httpd.conf or default-server.conf for Apache, make sure "AllowOverride" is set to "All").     
-  1. This will prevent external users from accessing your keys. 
-  2. I include htaccess files to prevent outside access of the "keys" directory, but it only works when AllowOverride is set to "All".
+   1. This will prevent external users from accessing your keys. 
+   2. I include htaccess files to prevent outside access of the "keys" directory, but it only works when AllowOverride is set to "All".
 
 3. When creating RSA key pairs, PHP uses entropy on server to generate the keys. Should your server be idle or not have much activity - generating keys may take some time and may not work correctly. 
 
-So in that case you'll have two options.    
-  1. Change default timeout for PHP. (Not advised)    
-  2. Install the "php5-gmp" package. It will greatly decrease your key generatation time. 
+   So in that case you'll have two options.    
+   1. Change default timeout for PHP. (Not advised)    
+   2. Install the "php5-gmp" package. It will greatly decrease your key generatation time. 
 
 Either way, the software package will notify you if the "php5-gmp" package isn't installed or loaded.
 
